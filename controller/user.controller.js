@@ -2,9 +2,12 @@ const userService = require('../services/user.services');
 // 📌 Kullanıcı kayıt
 const registerUser = async (req, res) => {
     try {
+        
         const result = await userService.registerUser(req.body.username, req.body.email, req.body.password);
+        console.log("🟢 Kullanıcı kaydedildi:", result);
         res.status(201).json(result);
     } catch (error) {
+        console.log("🔴 Hata:", error.message);
         res.status(400).json({ message: error.message });
     }
 };

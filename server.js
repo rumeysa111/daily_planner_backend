@@ -3,15 +3,17 @@ const mongoose = require('mongoose');
 const cors = require('cors');  // front end isteklerini yönetmek için ekliyoruz
 const userRoutes = require('./routes/user.router');
 const todoRoutes = require('./routes/todoRouters'); // 📌 To-Do rotalarını ekledik
+const categoryRoutes = require('./routes/categoryRoutes');
+
 const connectDB = require('./config/db');
 require('dotenv').config();
 
 const app = express();
 app.use(cors());
 app.use(express.json()); // JSON formatındaki istekleri anlamak için
-app.use('/api/auth',userRoutes);
+app.use('/api/auth', userRoutes);
 app.use('/api/todos', todoRoutes); // 📌 To-Do rotalarını tanımladık
-
+app.use('/api/categories', categoryRoutes);
 connectDB();
 app.get('/', (req, res) => {
     res.send('🚀 Sunucu çalışıyor');

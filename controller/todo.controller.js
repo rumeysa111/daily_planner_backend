@@ -21,18 +21,35 @@ const getTodos = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
-
+const getTodosByDate = async (req, res) => {
+    const userId = req.user.userId;
+    const selectedDate = req.query.date;
+    if(!selectedDate){
+        return res.status(400).json({message: "Tarih bilgisi eksik!"});
+    }
+    try {
+        const todos = await todoService.getTodosByDate(userId, selectedDate);
+        res.status(200).json(todos);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+        
+    }
+}
 // Görev Güncelleme
 const updateTodo = async (req, res) => {
     const userId = req.user.userId;
     const todoId = req.params.id;
     try {
+        console.log("📢 Görev güncelleniyor:", todoId);
+        console.log("📄 Güncellenmiş Veriler:", req.body);
         const updatedTodo = await todoService.updateTodo(userId, todoId, req.body);
         if (!updatedTodo) {
             return res.status(404).json({ message: "Görev bulunamadı!" });
         }
         res.status(200).json(updatedTodo);
     } catch (error) {
+        console.log("⚠️ Hata:", error.message);
+
         res.status(500).json({ message: error.message });
     }
 };
@@ -57,4 +74,5 @@ module.exports = {
     getTodos,
     updateTodo,
     deleteTodo,
+    getTodosByDate,
 };
