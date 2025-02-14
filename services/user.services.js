@@ -24,11 +24,11 @@ const registerUser = async (username, email, password) => {
         await Category.insertMany(categoriesToInsert);
         console.log("✅ Kullanıcı başarıyla kaydedildi ve varsayılan kategoriler eklendi!");
         //kullanıcın varsayılan kategorileirni geçerli_category_id
-        const userCategories=await Category.find({userId:newUser._id});
+        const userCategories = await Category.find({ userId: newUser._id });
 
-        return { 
-            message: "Kullanıcı başarıyla kaydedildi ve varsayılan kategoriler eklendi!", 
-            userId: newUser._id, 
+        return {
+            message: "Kullanıcı başarıyla kaydedildi ve varsayılan kategoriler eklendi!",
+            userId: newUser._id,
             categories: userCategories // ✅ Kullanıcının varsayılan kategorilerini de döndürüyoruz
         };
     } catch (error) {
@@ -64,9 +64,9 @@ const loginUser = async (email, password) => {
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
         const categories = await Category.find({ userId: user._id });
 
-        return { 
-            token, 
-            userId: user._id ,
+        return {
+            token,
+            userId: user._id,
             categories
         };
     } catch (error) {
@@ -84,8 +84,62 @@ const getUserProfile = async (userId) => {
     }
 };
 
+const updateUserProfile = async (userId, updateData) => {
+    try {
+        const { username, email } = updateData;
+
+        // Email değişiyorsa, yeni email'in başka kullanıcıda olup olmadığını kontrol et
+        if (email) {
+            const existingUser = await User.findOne({ email, _id: { $ne: userId } });
+            if (existingUser) {
+                throw new Error("Bu e-posta adresi başka bir kullanıcı tarafından kullanılıyor!");
+            }
+        }
+
+        const updatedUser = await User.findByIdAndUpdate(
+            userId,
+            { username, email },
+            { new: true }
+        ).select("-password");
+
+        if (!updatedUser) {
+            throw new Error("Kullanıcı bulunamadı!");
+        }
+
+        return updatedUser;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
+
+const changeUserPassword = async (userId, currentPassword, newPassword) => {
+    try {
+        const user = await User.findById(userId);
+        if (!user) {
+            throw new Error("Kullanıcı bulunamadı!");
+        }
+
+        // Mevcut şifreyi kontrol et
+        const isMatch = await bcrypt.compare(currentPassword, user.password);
+        if (!isMatch) {
+            throw new Error("Mevcut şifre yanlış!");
+        }
+
+        // Yeni şifreyi hashle
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        user.password = hashedPassword;
+        await user.save();
+
+        return true;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
+
 module.exports = {
     registerUser,
     loginUser,
-    getUserProfile
+    getUserProfile,
+    updateUserProfile,
+    changeUserPassword
 };
