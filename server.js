@@ -4,6 +4,7 @@ const cors = require('cors');  // front end isteklerini yönetmek için ekliyoru
 const userRoutes = require('./routes/user.router');
 const todoRoutes = require('./routes/todoRouters'); // 📌 To-Do rotalarını ekledik
 const categoryRoutes = require('./routes/categoryRoutes');
+const statisticsRoutes = require('./routes/statistics_routes');
 
 const connectDB = require('./config/db');
 require('dotenv').config();
@@ -14,6 +15,7 @@ app.use(express.json()); // JSON formatındaki istekleri anlamak için
 app.use('/api/auth', userRoutes);
 app.use('/api/todos', todoRoutes); // 📌 To-Do rotalarını tanımladık
 app.use('/api/categories', categoryRoutes);
+app.use('/api/statistics', statisticsRoutes);
 connectDB();
 app.get('/', (req, res) => {
     res.send('🚀 Sunucu çalışıyor');
