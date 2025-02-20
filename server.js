@@ -20,5 +20,20 @@ connectDB();
 app.get('/', (req, res) => {
     res.send('🚀 Sunucu çalışıyor');
 });
+app.get('/api/health', (req, res) => {
+    const dbState = mongoose.connection.readyState;
+    const dbStatus = {
+        0: "Disconnected",
+        1: "Connected",
+        2: "Connecting",
+        3: "Disconnecting"
+    };
+    
+    res.json({
+        server: "🚀 Running",
+        database: dbStatus[dbState],
+        mongodb: dbState === 1 ? "✅ Connected" : "❌ Not Connected"
+    });
+});
 const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`🚀 Sunucu ${port} portunda çalışıyor`));
