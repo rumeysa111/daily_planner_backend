@@ -2,7 +2,7 @@ const express = require('express');
 const { registerUser, loginUser, getUserProfile, updateProfile, changePassword } = require('../controller/user.controller');
 const authMiddleware = require('../middleware/authMiddleware');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const router = express.Router();
 
 // 📌 Kullanıcı işlemleri

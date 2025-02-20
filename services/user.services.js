@@ -2,7 +2,7 @@ const User = require("../model/user.model");
 const jwt = require("jsonwebtoken");
 const Category = require("../model/category_model"); // Eklediğiniz kısım
 
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const defaultCategories = require("../config/defaultCategories");
 // 📌 Kullanıcı kayıt işlemi + Varsayılan kategoriler
 const registerUser = async (username, email, password) => {
