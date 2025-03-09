@@ -116,6 +116,13 @@ Proje, **Domain-Driven Design (DDD)** prensiplerine uygun olarak geliştirilmiş
 - **Config**: Yapılandırma ayarlarını içerir
 
 ---
+## 🎯 Katkıda Bulunma
+
+1. **Fork yapın** (Sağ üst köşedeki Fork butonuna basın).
+2. Yeni bir **özellik dalı** oluşturun (`git checkout -b feature/amazing-feature`).
+3. Değişikliklerinizi commit edin (`git commit -m 'Yeni özellik eklendi'`).
+4. **Dalınıza push edin** (`git push origin feature/amazing-feature`).
+5. **Pull Request açın** 🎉
 
 ## ⚙️ CI/CD
 
