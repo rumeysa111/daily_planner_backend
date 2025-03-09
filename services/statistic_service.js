@@ -79,6 +79,7 @@ const calculateWeeklyProgress = (tasks) => {
     const startOfWeek = new Date(now);
     startOfWeek.setDate(now.getDate() - now.getDay() + 1);
     console.log("📅 Haftalık ilerleme hesaplanıyor...");
+    console.log(`📆 Haftanın başlangıcı: ${startOfWeek.toISOString().split("T")[0]}`);
 
     for (let i = 0; i < 7; i++) {
         const day = new Date(startOfWeek);
@@ -90,16 +91,23 @@ const calculateWeeklyProgress = (tasks) => {
             const taskDate = new Date(task.dueDate);
             console.log(` Görev Tarihi: ${taskDate.toISOString().split("T")[0]}`);
 
-            return taskDate.getFullYear() === day.getFullYear() &&
+            const sameDay= taskDate.getFullYear() === day.getFullYear() &&
                 taskDate.getMonth() === day.getMonth() &&
                 taskDate.getDate() === day.getDate();
+            if (sameDay) {
+                console.log(`  ✓ Eşleşen görev: ${taskDate.toISOString().split("T")[0]}`);
+            }return sameDay;
         });
         // o güne ait tamamlanmış görevleri bul
         if (dayTasks.length > 0) {
             const completed = dayTasks.filter(task => task.isCompleted).length;
             progress[i] = completed / dayTasks.length;
+            console.log(`  Günlük ilerleme [${i}] = ${progress[i]} (${completed}/${dayTasks.length} tamamlandı)`);
+
+        } else {
+            console.log(`Günlük ilerleme [${i}] = ${progress[i]}`);
+
         }
-        console.log(`Günlük ilerleme [${i}] = ${progress[i]}`);
 
     }
     console.log(" Haftalık ilerleme tamamlandı:", progress);
@@ -111,7 +119,9 @@ const calculateWeeklyProgress = (tasks) => {
 const calculateStreak = (tasks) => {
     let streak = 0;
     const now = new Date();
-    let currentDate = now;
+    now.setHours(0, 0, 0, 0); // Reset time portion
+
+    let currentDate = new Date(now);
     while (true) {
         const dayTasks = tasks.filter(task => {
             const taskDate = task.dueDate;
