@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 const TodoSchema = new mongoose.Schema({
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }, // 📌 Kullanıcıya ait görev
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
 
     title: { type: String, required: true },
     category: { 
         type: mongoose.Schema.Types.ObjectId, 
-        ref: "Category",  // 📌 Kategori artık ayrı bir koleksiyon!
+        ref: "Category",  
         required: true 
     },
     dueDate: { type: Date },

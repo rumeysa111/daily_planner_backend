@@ -3,7 +3,7 @@ const {createTodo, getTodos, updateTodo, deleteTodo,getTodosByDate} = require('.
 const authMiddleware = require('../middleware/authMiddleware');
 const router = express.Router();
 
-// 📌 Görev CRUD İşlemleri
+// Görev CRUD İşlemleri
 router.post('/', authMiddleware, createTodo);
 router.get('/', authMiddleware, getTodos);
 router.put('/:id', authMiddleware, updateTodo);

@@ -1,18 +1,18 @@
 const userService = require('../services/user.services');
-// 📌 Kullanıcı kayıt
+//  Kullanıcı kayıt
 const registerUser = async (req, res) => {
     try {
 
         const result = await userService.registerUser(req.body.username, req.body.email, req.body.password);
-        console.log("🟢 Kullanıcı kaydedildi:", result);
+        console.log(" Kullanıcı kaydedildi:", result);
         res.status(201).json(result);
     } catch (error) {
-        console.log("🔴 Hata:", error.message);
+        console.log(" Hata:", error.message);
         res.status(400).json({ message: error.message });
     }
 };
 
-// 📌 Kullanıcı giriş yapma
+//  Kullanıcı giriş yapma
 const loginUser = async (req, res) => {
     try {
         const result = await userService.loginUser(req.body.email, req.body.password);
@@ -22,7 +22,7 @@ const loginUser = async (req, res) => {
     }
 };
 
-// 📌 Kullanıcı bilgilerini al
+//  Kullanıcı bilgilerini al
 const getUserProfile = async (req, res) => {
     try {
         const user = await userService.getUserProfile(req.user.userId);

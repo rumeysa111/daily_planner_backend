@@ -4,7 +4,7 @@ const getCategoriesByUser = async (userId) => {
     return await Category.find({ userId });
 };
 
-// 📌 Yeni Kategori Ekle (Tüm veriyi tek obje olarak alır)
+//  Yeni Kategori Ekle (Tüm veriyi tek obje olarak alır)
 const addCategory = async (categoryData) => {
     const { userId, name, icon, color } = categoryData;
 
@@ -18,12 +18,12 @@ const addCategory = async (categoryData) => {
     return await newCategory.save();
 };
 
-// 📌 Kategoriyi Güncelle (Tek obje alır)
+//  Kategoriyi Güncelle (Tek obje alır)
 const updateCategory = async (id, updatedData) => {
     return await Category.findByIdAndUpdate(id, updatedData, { new: true });
 };
 
-// 📌 Kategoriyi Sil
+//  Kategoriyi Sil
 const deleteCategory = async (id) => {
     return await Category.findByIdAndDelete(id);
 };

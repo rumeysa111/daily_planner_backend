@@ -40,15 +40,15 @@ const updateTodo = async (req, res) => {
     const userId = req.user.userId;
     const todoId = req.params.id;
     try {
-        console.log("📢 Görev güncelleniyor:", todoId);
-        console.log("📄 Güncellenmiş Veriler:", req.body);
+        console.log(" Görev güncelleniyor:", todoId);
+        console.log(" Güncellenmiş Veriler:", req.body);
         const updatedTodo = await todoService.updateTodo(userId, todoId, req.body);
         if (!updatedTodo) {
             return res.status(404).json({ message: "Görev bulunamadı!" });
         }
         res.status(200).json(updatedTodo);
     } catch (error) {
-        console.log("⚠️ Hata:", error.message);
+        console.log("Hata:", error.message);
 
         res.status(500).json({ message: error.message });
     }

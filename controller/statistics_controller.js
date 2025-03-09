@@ -2,7 +2,7 @@ const statisticsService = require('../services/statistic_service');
 const getStatisticsController = async (req, res) => {
     try {
         const userId = req.user.userId;
-        console.log("📊 İstatistikler hesaplanıyor - UserId:", userId);
+        console.log(" İstatistikler hesaplanıyor - UserId:", userId);
 
         if (!userId) {
             throw new Error('Kullanıcı ID bulunamadı');
@@ -17,14 +17,14 @@ const getStatisticsController = async (req, res) => {
             });
         }
 
-        console.log("✅ İstatistikler başarıyla hesaplandı");
+        console.log(" İstatistikler başarıyla hesaplandı");
         res.json({
             success: true,
             data: statistics
         });
 
     } catch (error) {
-        console.error("❌ İstatistik hatası:", error.message);
+        console.error(" İstatistik hatası:", error.message);
         res.status(500).json({ 
             success: false,
             message: error.message 

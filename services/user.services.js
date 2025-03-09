@@ -4,7 +4,7 @@ const Category = require("../model/category_model"); // Eklediğiniz kısım
 
 const bcrypt = require("bcryptjs");
 const defaultCategories = require("../config/defaultCategories");
-// 📌 Kullanıcı kayıt işlemi + Varsayılan kategoriler
+//Kullanıcı kayıt işlemi + Varsayılan kategoriler
 const registerUser = async (username, email, password) => {
     try {
         const existingUser = await User.findOne({ email });
@@ -40,27 +40,27 @@ const registerUser = async (username, email, password) => {
 
 const loginUser = async (email, password) => {
     try {
-        console.log("🟢 Giriş denemesi:", email, password);
+        console.log(" Giriş denemesi:", email, password);
 
         const user = await User.findOne({ email });
         if (!user) {
-            console.log("❌ Kullanıcı bulunamadı!");
+            console.log(" Kullanıcı bulunamadı!");
             throw new Error("Geçersiz e-posta veya şifre!");
         }
 
-        console.log("✅ Kullanıcı bulundu:", user.email);
-        console.log("🔵 Hashlenmiş şifre MongoDB’den:", user.password);
-        console.log("🟠 Girilen şifre:", password);
+        console.log(" Kullanıcı bulundu:", user.email);
+        console.log(" Hashlenmiş şifre MongoDB’den:", user.password);
+        console.log(" Girilen şifre:", password);
 
         const isMatch = await bcrypt.compare(password, user.password);
-        console.log("🔴 Karşılaştırma sonucu:", isMatch);
+        console.log(" Karşılaştırma sonucu:", isMatch);
 
         if (!isMatch) {
-            console.log("❌ Şifre yanlış!");
+            console.log(" Şifre yanlış!");
             throw new Error("Geçersiz e-posta veya şifre!");
         }
 
-        console.log("✅ Şifre doğru, giriş başarılı!");
+        console.log(" Şifre doğru, giriş başarılı!");
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
         const categories = await Category.find({ userId: user._id });
 
@@ -70,12 +70,12 @@ const loginUser = async (email, password) => {
             categories
         };
     } catch (error) {
-        console.log("⚠️ Hata:", error.message);
+        console.log(" Hata:", error.message);
         throw new Error(error.message);
     }
 };
 
-// 📌 Kullanıcı bilgilerini al
+// Kullanıcı bilgilerini al
 const getUserProfile = async (userId) => {
     try {
         return await User.findById(userId).select("-password");

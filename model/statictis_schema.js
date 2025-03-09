@@ -4,7 +4,7 @@ const StatisticsSchema = new mongoose.Schema({
     completedTasks: { type: Number, default: 0 }, // 📌 Tamamlanan görev sayısı
     totalTasks: { type: Number, default: 0 }, // 📌 Toplam görev sayısı
     categoryCompletion: { type: Map, of: Number, default: new Map() },
-    weeklyProgress: [Number],
+    weeklyProgress: { type: [Number], default: [0, 0, 0, 0, 0, 0, 0] },
     currentStreak: { type: Number, default: 0 },
     pendingTasks: { type: Number, default: 0 },
     completionRate: { type: Number, default: 0 },
@@ -14,4 +14,5 @@ const StatisticsSchema = new mongoose.Schema({
 
 
 });
+
 module.exports=mongoose.model('Statistics',StatisticsSchema);
