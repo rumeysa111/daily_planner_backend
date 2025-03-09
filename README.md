@@ -1,8 +1,8 @@
 # 📌 Daily Planner Backend
 
-## 📖 Genel Bakış
+## 📖 Proje Özellikleri
 
-Bu proje, **DDD (Domain-Driven Design)** yaklaşımıyla geliştirilmiş bir **Todo (Yapılacaklar) uygulamasının backend kısmıdır**. MongoDB veritabanı üzerinde çalışan, **Express ve Node.js ile yazılmış bir RESTful API**'dir.
+Bu proje, **DDD (Domain-Driven Design)** yaklaşımıyla geliştirilmiş bir **Daily Planner uygulamasının backend kısmıdır**. MongoDB veritabanı üzerinde çalışan, **Express ve Node.js ile yazılmış bir RESTful API**'dir.
 
 ---
 
