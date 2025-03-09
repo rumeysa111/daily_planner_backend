@@ -47,8 +47,7 @@ Bu proje, **DDD (Domain-Driven Design)** yaklaşımıyla geliştirilmiş bir **D
 
 ### **1️⃣ Projeyi Klonlayın**
 ```bash
-git clone https://github.com/yourusername/mytodo_backend.git
-cd mytodo_backend
+git clone https://github.com/rumeysa111/daily_planner_backend.git
 ```
 
 ### **2️⃣ Bağımlılıkları Yükleyin**
