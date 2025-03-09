@@ -126,13 +126,6 @@ Proje, **GitHub Actions** kullanılarak **Azure Web Apps**'e otomatik olarak da�
 
 ## 📜 Lisans
 
-**ISC Lisansı** altında sunulmaktadır. *(İsterseniz farklı bir lisans ekleyebilirsiniz.)*
+*MIT Lisansı** altında sunulmaktadır. *
 
----
-
-## 📩 İletişim
-
-📬 **Proje hakkında sorularınız veya önerileriniz için iletişime geçin:**  
-📌 **GitHub:** [YourUsername](https://github.com/yourusername)
-
-🔗 **Proje Linki:** [MyTodo Backend - GitHub](https://github.com/yourusername/mytodo_backend)
+)
